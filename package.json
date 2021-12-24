@@ -4,7 +4,7 @@
   "description": "A social data fetcher",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon social/index.js"
+    "start": "node social/index.js"
   },
   "author": "",
   "license": "ISC",
