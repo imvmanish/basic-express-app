@@ -4,9 +4,6 @@ const format = require('date-format');
 
 const PORT = process.env.PORT || 3000;
 
-app.get('/api/v1/:id',(req,res) => {
-    res.status(200).json({params: req.params.id});
-});
 
 app.get("/api/v1/instagram",(req,res) => {
     const instaSocial = {
@@ -34,6 +31,10 @@ app.get("/api/v1/facebook",(req,res) => {
     // Following: ${fbSocial.following}
     // `);
     res.status(200).json({fbSocial});
+});
+
+app.get('/api/v1/:id',(req,res) => {
+    res.status(200).json({params: req.params.id});
 });
 
 app.listen(PORT,() => {
