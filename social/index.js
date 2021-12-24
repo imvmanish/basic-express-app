@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const format = require('date-format');
 
-const PORT = 3000 || process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 app.get('/api/v1/:id',(req,res) => {
     res.status(200).json({params: req.params.id});
