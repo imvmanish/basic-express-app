@@ -1,9 +1,17 @@
 const express = require('express');
 const app = express();
 const format = require('date-format');
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./social/swagger.yaml');
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const PORT = process.env.PORT || 3000;
 
+app.get('/',(req,res) => {
+    res.status(200).send("Social Count")
+});
 
 app.get("/api/v1/instagram",(req,res) => {
     const instaSocial = {
@@ -12,10 +20,6 @@ app.get("/api/v1/instagram",(req,res) => {
         following: 300,
         date: format.asString("hh:mm:ss",new Date())
     };
-    // res.status.send(`Username: <strong>${instaSocial.username}</strong><br>
-    // Followers: ${instaSocial.followers}<br>
-    // Following: ${instaSocial.following}
-    // `);
     res.status(200).json({instaSocial});
 });
 
@@ -26,10 +30,6 @@ app.get("/api/v1/facebook",(req,res) => {
         following: 300,
         date: format.asString("dd/MM hh:mm:ss",new Date())
     };
-    // res.status.send(`Username: <strong>${fbSocial.username}</strong><br>
-    // Followers: ${fbSocial.followers}<br>
-    // Following: ${fbSocial.following}
-    // `);
     res.status(200).json({fbSocial});
 });
 

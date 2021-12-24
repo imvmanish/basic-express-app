@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info: 
+  title: Social App API
+  description: Our first Social App - Manish 
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api/v1
+    description: local host api 
+  - url: http://localhost:3000/api/v1
+    description: dummy api url,it won't work
+
+components:
+  securitySchemes:
+
+    BasicAuth:
+      type: http
+      scheme: basic
+
+    BearerAuth:
+      type: http
+      scheme: bearer
+
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+
+    OpenID:
+      type: openIdConnect
+      openIdConnectUrl: https://example.com/.well-known/openid-configuration
+
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://example.com/oauth/authorize
+          tokenUrl: https://example.com/oauth/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+            admin: Grants access to admin operations
+
+paths: 
+  /instagram: 
+    get:
+      summary: returns followers,following,username
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  followers:
+                    type: string
+                  following:
+                    type: string
+    post:
+      summary: returns followers,following,username
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  followers:
+                    type: string
+                  following:
+                    type: string 
+  /facebook: 
+    get:
+      summary: returns followers,following,username
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  followers:
+                    type: string
+                  following:
+                    type: string              
+  /{id}:
+    get:
+      summary: returns whatever parameter is sent
+      parameters:
+        - name: id
+          in: path
+          default: 5
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  
